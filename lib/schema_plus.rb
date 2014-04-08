@@ -81,6 +81,7 @@ module SchemaPlus
       has_value :on_delete
     end
     has_value :foreign_keys, :klass => ForeignKeys, :default => ForeignKeys.new
+    has_value :ignore_sqlite3_case_sensitive_index, :klass => :boolean, :default => false
 
     def dup #:nodoc:
       self.class.new(Hash[attributes.collect{ |key, val| [key, Valuable === val ?  val.class.new(val.attributes) : val] }])

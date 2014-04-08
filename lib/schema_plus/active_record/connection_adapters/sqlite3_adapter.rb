@@ -79,6 +79,11 @@ module SchemaPlus
           sql.sub(/^CREATE VIEW \S* AS\s+/im, '') unless sql.nil?
         end
 
+        def add_index(table_name, column_name, options = {})
+        	options.delete :case_sensitive if SchemaPlus.config.ignore_sqlite3_case_sensitive_index
+        	super(table_name, column_name, options)
+        end
+
         protected
 
         def get_foreign_keys(table_name = nil, name = nil)
